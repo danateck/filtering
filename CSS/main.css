@@ -1,0 +1,13 @@
+/* MAIN CSS  */
+
+/* 🧱 Base styles */
+@import url(./base/variable.css);
+@import url(./base/reset.css);
+
+/* 💫 Utilities */
+@import url(./utils/helper.css);
+
+/* 🧩 Components */
+@import url(./components/header.css);
+@import url(./components/card.css);
+@import url(./components/filter.css);
