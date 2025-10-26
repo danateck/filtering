@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+
+  <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@500;700&display=swap"
+    rel="stylesheet"
+  />
+
+  <link rel="stylesheet" href="style.css" />
+
+  <title>Job Listings with Filtering</title>
+</head>
+<body>
+  <header class="site-header">
+    <img class="site-header__bg" src="./images/bg-header-desktop.svg" alt="" />
+  </header>
+
+  <main class="site-main">
+    <!-- FILTER BAR (hidden until filters exist) -->
+    <section class="filter-bar" id="filterBar" hidden>
+      <div class="filter-bar__tags" id="activeFilters">
+        <!-- active filter pills injected here -->
+      </div>
+      <button class="filter-bar__clear" id="clearBtn" aria-label="Clear all filters">
+        Clear
+      </button>
+    </section>
+
+    <!-- JOB LIST -->
+    <section class="job-list" id="jobList">
+      <!-- cards injected here -->
+    </section>
+  </main>
+
+  <footer class="attribution">
+    Challenge by Frontend Mentor.
+    Coded by You.
+  </footer>
+
+  <script src="script.js" defer></script>
+</body>
+</html>
