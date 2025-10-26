@@ -1,6 +1,6 @@
 // ========= STATE =========
 let allJobs = [];
-let activeFilters = new Set();
+const activeFilters = new Set();
 
 // DOM refs
 const jobListEl = document.getElementById("jobList");
@@ -90,7 +90,7 @@ clearBtn.addEventListener("click", () => {
 
 // Build a <article> job card
 function buildJobCard(job) {
-  const {
+    const {
     company,
     logo,
     new: isNew,
@@ -99,11 +99,11 @@ function buildJobCard(job) {
     postedAt,
     contract,
     location,
-    role,
     level,
     languages,
     tools,
-  } = job;
+    } = job;
+
 
   const tags = collectJobTags(job);
 

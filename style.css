@@ -1,4 +1,4 @@
-/* =============== CSS RESET (lightweight) =============== */
+/* =============== CSS RESET =============== */
 *,
 *::before,
 *::after {
@@ -20,7 +20,6 @@ button {
 }
 
 /* =============== THEME TOKENS =============== */
-/* Using the challenge palette */
 :root {
   --clr-primary: hsl(180, 29%, 50%);
   --clr-bg: hsl(180, 52%, 96%);
@@ -28,18 +27,20 @@ button {
   --clr-text-dim: hsl(180, 8%, 52%);
   --clr-white: #fff;
 
-  --radius-card: 4px;
-  --radius-pill: 4px;
-  --shadow-card: 0 10px 20px hsl(180 29% 50% / 0.15);
+  --radius-card: 0.25rem;
+  --radius-pill: 0.25rem;
+  --shadow-card: 0 0.625rem 1.25rem hsl(180 29% 50% / 0.15);
 
-  --fs-body: 15px;
+  --fs-body: 0.9375rem; /* 15px */
   --ff-main: "League Spartan", system-ui, sans-serif;
   --fw-bold: 700;
   --fw-medium: 500;
+
+  /* Global sizes for better scaling */
+  --header-min-height: 9.375rem; /* 150px */
 }
 
 /* =============== GLOBAL LAYOUT =============== */
-
 body {
   min-height: 100vh;
   font-family: var(--ff-main);
@@ -54,14 +55,14 @@ body {
   background-color: var(--clr-primary);
   position: relative;
   width: 100%;
-  min-height: 150px;
+  min-height: var(--header-min-height);
   overflow: hidden;
   display: flex;
   align-items: center;
   justify-content: center;
 }
+
 .site-header__bg {
-  /* The design uses an abstract SVG wave shape */
   width: 100%;
   height: 100%;
   object-fit: cover;
@@ -71,10 +72,10 @@ body {
 
 /* Main wrapper */
 .site-main {
-  width: min(1100px, 90%);
+  width: min(68.75rem, 90%); /* 1100px → rem */
   margin-inline: auto;
-  margin-top: -3rem; /* pull content up under header like in the design */
-  padding-bottom: 4rem;
+  margin-block-start: -3rem; /* logical property instead of margin-top */
+  padding-block-end: 4rem;
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
@@ -90,22 +91,22 @@ body {
   justify-content: space-between;
   align-items: flex-start;
   flex-wrap: wrap;
-  border-left: 4px solid transparent;
+  border-inline-start: 0.25rem solid transparent;
 }
 
 .filter-bar__tags {
   display: flex;
   flex-wrap: wrap;
   gap: 0.75rem;
-  margin-bottom: 0.75rem;
+  margin-block-end: 0.75rem;
 }
 
-@media (min-width: 700px) {
+@media (min-width: 43.75em) { /* 700px */
   .filter-bar {
     align-items: center;
   }
   .filter-bar__tags {
-    margin-bottom: 0;
+    margin-block-end: 0;
   }
 }
 
@@ -120,7 +121,7 @@ body {
 }
 
 .active-filter__label {
-  padding: 0.5rem 0.5rem 0.5rem 0.5rem;
+  padding: 0.5rem;
 }
 
 .active-filter__remove {
@@ -130,30 +131,39 @@ body {
   display: grid;
   place-items: center;
   font-weight: var(--fw-bold);
-  transition: background 0.15s;
+  transition: background 0.15s ease-in-out;
 }
+
 .active-filter__remove:hover,
 .active-filter__remove:focus {
   background-color: var(--clr-text-main);
 }
 
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    transition: none !important;
+    animation: none !important;
+  }
+}
+
 .filter-bar__clear {
-  margin-left: auto;
-  margin-right: 0;
-  margin-bottom: 0.75rem;
+  margin-inline-start: auto;
+  margin-block-end: 0.75rem;
   color: var(--clr-text-dim);
   font-weight: var(--fw-bold);
   text-decoration: underline;
-  transition: color 0.15s;
+  transition: color 0.15s ease-in-out;
 }
+
 .filter-bar__clear:hover,
 .filter-bar__clear:focus {
   color: var(--clr-primary);
 }
 
-@media (min-width: 700px) {
+@media (min-width: 43.75em) {
   .filter-bar__clear {
-    margin-bottom: 0;
+    margin-block-end: 0;
   }
 }
 
@@ -164,12 +174,11 @@ body {
   gap: 1rem;
 }
 
-/* Card */
 .job-card {
   background-color: var(--clr-white);
   border-radius: var(--radius-card);
   box-shadow: var(--shadow-card);
-  border-left: 4px solid transparent;
+  border-inline-start: 0.25rem solid transparent;
   padding: 1.5rem;
   display: flex;
   flex-direction: column;
@@ -177,10 +186,9 @@ body {
 }
 
 .job-card--featured {
-  border-left-color: var(--clr-primary);
+  border-inline-start-color: var(--clr-primary);
 }
 
-/* top row: logo + info */
 .job-card__top {
   display: flex;
   flex-direction: row;
@@ -189,17 +197,13 @@ body {
 }
 
 .job-card__logo {
-  width: 48px;
-  height: 48px;
+  width: 3rem;
+  height: 3rem;
   border-radius: 50%;
   flex-shrink: 0;
-  background-color: var(--clr-bg); /* fallback behind SVG */
+  background-color: var(--clr-bg);
   display: grid;
   place-items: center;
-}
-
-.job-card__main {
-  flex: 1;
 }
 
 .job-card__company-row {
@@ -207,7 +211,7 @@ body {
   flex-wrap: wrap;
   align-items: center;
   gap: 0.5rem;
-  margin-bottom: 0.4rem;
+  margin-block-end: 0.4rem;
 }
 
 .job-card__company {
@@ -226,9 +230,9 @@ body {
   padding: 0.4rem 0.5rem 0.3rem;
   border-radius: 999px;
 }
+
 .badge--dark {
   background-color: var(--clr-text-main);
-  color: var(--clr-white);
 }
 
 .job-card__position {
@@ -238,6 +242,7 @@ body {
   line-height: 1.2;
   cursor: pointer;
 }
+
 .job-card__position:hover,
 .job-card__position:focus {
   color: var(--clr-primary);
@@ -255,17 +260,16 @@ body {
 .job-card__meta-dot::before {
   content: "•";
   color: var(--clr-text-dim);
-  margin-right: 0.75rem;
+  margin-inline-end: 0.75rem;
 }
 
-/* bottom row: tags */
 .job-card__tags {
   display: flex;
   flex-wrap: wrap;
   gap: 0.75rem;
-  padding-top: 0.75rem;
-  border-top: 1px solid hsl(180 8% 52% / 0.3);
-  margin-top: 0.5rem;
+  padding-block-start: 0.75rem;
+  border-block-start: 1px solid hsl(180 8% 52% / 0.3);
+  margin-block-start: 0.5rem;
 }
 
 .tag-pill {
@@ -274,19 +278,20 @@ body {
   font-weight: var(--fw-bold);
   font-size: 0.9rem;
   border-radius: var(--radius-pill);
-  padding: 0.5rem 0.5rem;
+  padding: 0.5rem;
   line-height: 1;
   cursor: pointer;
-  transition: all 0.15s;
+  transition: all 0.15s ease-in-out;
 }
+
 .tag-pill:hover,
 .tag-pill:focus {
   background-color: var(--clr-primary);
   color: var(--clr-white);
 }
 
-/* DESKTOP layout tweaks */
-@media (min-width: 700px) {
+/* DESKTOP tweaks */
+@media (min-width: 43.75em) {
   .job-card {
     flex-direction: row;
     align-items: center;
@@ -298,20 +303,21 @@ body {
   }
 
   .job-card__tags {
-    border-top: none;
-    margin-top: 0;
-    padding-top: 0;
+    border-block-start: none;
+    margin-block-start: 0;
+    padding-block-start: 0;
   }
 }
 
 /* =============== FOOTER ATTRIBUTION =============== */
 .attribution {
-  margin-top: auto;
+  margin-block-start: auto;
   text-align: center;
-  font-size: 11px;
+  font-size: 0.6875rem;
   color: var(--clr-text-dim);
   padding: 2rem 1rem;
 }
+
 .attribution a {
   color: var(--clr-primary);
   text-decoration: underline;
